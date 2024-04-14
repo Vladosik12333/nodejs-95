@@ -5,4 +5,8 @@ const getAll = async (req, res) => {
   res.json({ products });
 };
 
-module.exports = { getAll };
+const create = async (req, res) => {
+  const newProduct = await Product.create(req.body);
+  res.json({ newProduct });
+};
+module.exports = { getAll, create };
