@@ -1,8 +1,9 @@
 const services = require("../services/product");
 
 const getAll = async (req, res) => {
-  const products = await services.getAll();
+  const products = await services.getAll(req.query);
   res.json({ products });
+  console.log(req.query);
 };
 
 const getOne = async (req, res) => {

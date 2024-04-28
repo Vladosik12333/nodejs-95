@@ -3,10 +3,19 @@ const wrapper = require("../helpers/wrapper");
 const controllers = require("../controllers/product");
 const validation = require("../middlewares/validation");
 
-const { createSchema, updateSchema, idSchema } = require("../models/product");
+const {
+  createSchema,
+  updateSchema,
+  idSchema,
+  getAllQuerySchema,
+} = require("../models/product");
 const route = express.Router();
 
-route.get("/", wrapper(controllers.getAll));
+route.get(
+  "/",
+  validation.query(getAllQuerySchema),
+  wrapper(controllers.getAll)
+);
 
 route.get("/:id", validation.params(idSchema), wrapper(controllers.getOne));
 

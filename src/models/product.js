@@ -31,6 +31,18 @@ const updateSchema = Joi.object({
   popular: Joi.boolean(),
 }).min(1);
 
+const getAllQuerySchema = Joi.object({
+  name: Joi.string(),
+  price: Joi.number(),
+  popular: Joi.boolean(),
+});
+
 const idSchema = Joi.object({ id: Joi.objectId().required() });
 
-module.exports = { Product, createSchema, updateSchema, idSchema };
+module.exports = {
+  Product,
+  createSchema,
+  updateSchema,
+  idSchema,
+  getAllQuerySchema,
+};

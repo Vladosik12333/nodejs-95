@@ -1,7 +1,17 @@
 const { Product } = require("../models/product");
 
-const getAll = async (filter) => {
-  const products = await Product.find(filter);
+const getAll = async (filters) => {
+  const pipeline = [];
+
+  if (typeof filters.name === "string")
+    pipeline.push({ $match: { name: new RegExp(filters.name) } });
+
+  if (typeof filters.popular === "boolean")
+    pipeline.push({ $match: { popular: filters.popular } });
+
+  const products =
+    (await pipeline.length) > 0 ? Product.aggregate(pipeline) : Product.find();
+
   return products;
 };
 

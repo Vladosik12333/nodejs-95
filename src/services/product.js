@@ -1,8 +1,8 @@
 const repositories = require("../repositories/product");
 const httpError = require("../helpers/httpError");
 
-const getAll = async () => {
-  const products = await repositories.getAll();
+const getAll = async (query) => {
+  const products = await repositories.getAll(query);
   return products;
 };
 
