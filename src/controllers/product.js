@@ -5,9 +5,15 @@ const getAll = async (req, res) => {
   res.json({ products });
 };
 
+const getOne = async (req, res) => {
+  const product = await services.getOne(req.params.id);
+  res.json({ product });
+
+}
+
 const create = async (req, res) => {
   const newProduct = await services.create(req.body);
   res.json({ newProduct });
 };
 
-module.exports = { getAll, create };
+module.exports = { getAll, create, getOne };

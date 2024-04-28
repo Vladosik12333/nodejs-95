@@ -8,6 +8,8 @@ const route = express.Router();
 
 route.get("/", wrapper(controllers.getAll));
 
+route.get("/:id", wrapper(controllers.getOne));
+
 route.post("/", validation.body(createSchema), wrapper(controllers.create));
 
 module.exports = route;
