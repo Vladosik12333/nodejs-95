@@ -1,12 +1,13 @@
-const { Product } = require("../models/product");
+const services = require("../services/product")
 
 const getAll = async (req, res) => {
-  const products = await Product.find();
+  const products = await services.getAll();
   res.json({ products });
 };
 
 const create = async (req, res) => {
-  const newProduct = await Product.create(req.body);
+  const newProduct = await services.create(req.body);
   res.json({ newProduct });
 };
+
 module.exports = { getAll, create };
