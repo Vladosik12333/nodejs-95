@@ -1,16 +1,14 @@
 const { Product } = require("../models/product");
 
-const getAll = async (filters) => {
-  const pipeline = [];
+const getAll = async (query) => {
+  const filters = {};
 
-  if (typeof filters.name === "string")
-    pipeline.push({ $match: { name: new RegExp(filters.name) } });
+  for (const keyParametr in query) {
+    const valueParametr = query[keyParametr];
+    filters[keyParametr] = { $regex: valueParametr, $options: "i" };
+  }
 
-  if (typeof filters.popular === "boolean")
-    pipeline.push({ $match: { popular: filters.popular } });
-
-  const products =
-    (await pipeline.length) > 0 ? Product.aggregate(pipeline) : Product.find();
+  const products = await Product.find(filters);
 
   return products;
 };
